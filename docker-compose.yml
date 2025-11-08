@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  discord-bot:
+    build: .
+    container_name: discord-mod-bot
+    restart: unless-stopped
+    
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - CLIENT_ID=${CLIENT_ID}
+      - DB_PATH=/app/data/bot.db
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    
+    volumes:
+      # Persist database
+      - ./data:/app/data
+      # Persist logs
+      - ./logs:/app/logs
+      # Mount source code for easy development
+      - ./src:/app/src
+      - ./.env:/app/.env:ro
+    
+    # Resource limits (adjust based on your needs)
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
