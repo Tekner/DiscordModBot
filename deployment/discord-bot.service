@@ -1,0 +1,31 @@
+# Discord Moderation Bot - Systemd Service
+
+[Unit]
+Description=Discord Moderation Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=discord-bot
+Group=discord-bot
+WorkingDirectory=/opt/discord-mod-bot
+ExecStart=/usr/bin/node src/index.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=discord-mod-bot
+
+# Environment
+Environment=NODE_ENV=production
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/discord-mod-bot/data /opt/discord-mod-bot/logs
+
+[Install]
+WantedBy=multi-user.target
