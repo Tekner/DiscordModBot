@@ -1,0 +1,27 @@
+{
+  "name": "discordmodbot",
+  "version": "1.0.0",
+  "description": "Custom Discord Mod Bot",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy": "node src/deploy-commands.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "moderation",
+    "discord-bot"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "discord.js": "^14.24.2",
+    "dotenv": "^17.2.3"
+  }
+}
